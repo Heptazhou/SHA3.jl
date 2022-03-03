@@ -1,4 +1,4 @@
-using SHA
+using SHA3
 
 if isempty(ARGS)
     error("need file to test sha perf")

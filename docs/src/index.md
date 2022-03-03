@@ -1,8 +1,8 @@
-# SHA
+# SHA3
 
 ```@meta
 DocTestSetup = quote
-    using SHA
+    using SHA3
     using InteractiveUtils
 end
 ```
@@ -12,7 +12,7 @@ end
 
 Usage is very straightforward:
 ```jldoctest
-julia> using SHA
+julia> using SHA3
 
 julia> bytes2hex(sha256("test"))
 "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
@@ -23,7 +23,7 @@ Each exported function (at the time of this writing, SHA-1, SHA-2 224, 256, 384 
 ```julia
 shell> cat /tmp/test.txt
 test
-julia> using SHA
+julia> using SHA3
 
 julia> open("/tmp/test.txt") do f
            sha2_256(f)
@@ -85,7 +85,7 @@ To create a hash from multiple items the `SHAX_XXX_CTX()` types can be used to c
 is updated with `update!` and finalized with `digest!`
 
 ```jldoctest
-julia> using SHA
+julia> using SHA3
 
 julia> ctx = SHA2_256_CTX()
 SHA2 256-bit hash state
@@ -120,7 +120,7 @@ julia> digest!(ctx)
  0xc5
 ```
 
-Note that, at the time of this writing, the SHA3 code is not optimized, and as such is roughly an order of magnitude slower than SHA2.
+Note that, at the time of this writing, the SHA-3 code is not optimized, and as such is roughly an order of magnitude slower than SHA-2.
 
 ```@docs
 update!
@@ -160,7 +160,7 @@ SHA3_512_CTX
 ## HMAC functions
 
 ```jldoctest
-julia> using SHA
+julia> using SHA3
 
 julia> key = collect(codeunits("key_string"))
 10-element Vector{UInt8}:
@@ -183,7 +183,7 @@ To create a hash from multiple items, the `HMAC_CTX()` types can be used to crea
 is updated with `update!` and finalized with `digest!`.
 
 ```jldoctest
-julia> using SHA
+julia> using SHA3
 
 julia> key = collect(codeunits("key_string"))
 10-element Vector{UInt8}:

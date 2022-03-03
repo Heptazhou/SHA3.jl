@@ -1,4 +1,5 @@
-using SHA, Test
+using SHA3, Test
+const SHA = SHA3
 
 include("constants.jl")
 

@@ -1,7 +1,7 @@
 """
-    SHA
+    SHA3
 
-The SHA module provides hashing functionality for SHA1, SHA2 and SHA3 algorithms.
+The SHA3 module provides hashing functionality for SHA1, SHA2 and SHA3 algorithms.
 
 They are implemented as both pure functions for hashing single pieces of data,
 or a stateful context which can be updated with the `update!` function and
@@ -31,7 +31,7 @@ julia> digest!(ctx)
  0xe3
  0x56
 """
-module SHA
+module SHA3
 
 # Export convenience functions, context types, update!() and digest!() functions
 export sha1, SHA1_CTX, update!, digest!
@@ -52,9 +52,9 @@ const AbstractBytes = Union{AbstractVector{UInt8},NTuple{N,UInt8} where N}
 include("constants.jl")
 include("types.jl")
 include("base_functions.jl")
-include("sha1.jl")
-include("sha2.jl")
-include("sha3.jl")
+include("sha_1.jl")
+include("sha_2.jl")
+include("sha_3.jl")
 include("common.jl")
 include("hmac.jl")
 
@@ -138,4 +138,4 @@ for (f, ctx) in [(:sha1, :SHA1_CTX),
     end
 end
 
-end #module SHA
+end #module SHA3
