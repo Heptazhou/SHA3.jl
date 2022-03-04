@@ -104,7 +104,7 @@ end
 # Define constants via functions so as not to bloat context objects.  Yay dispatch!
 
 # Digest lengths for SHA1, SHA2 and SHA3.  This is easy to figure out from the typename
-digestlen(::Type{SHA1_CTX}) = 20
+digestlen(::Type{SHA1_CTX})     = 20
 digestlen(::Type{SHA2_224_CTX}) = 28
 digestlen(::Type{SHA3_224_CTX}) = 28
 digestlen(::Type{SHA2_256_CTX}) = 32
@@ -115,15 +115,15 @@ digestlen(::Type{SHA2_512_CTX}) = 64
 digestlen(::Type{SHA3_512_CTX}) = 64
 
 # SHA1 and SHA2 have differing element types for the internal state objects
-state_type(::Type{SHA1_CTX}) = UInt32
+state_type(::Type{SHA1_CTX})     = UInt32
 state_type(::Type{SHA2_224_CTX}) = UInt32
 state_type(::Type{SHA2_256_CTX}) = UInt32
 state_type(::Type{SHA2_384_CTX}) = UInt64
 state_type(::Type{SHA2_512_CTX}) = UInt64
-state_type(::Type{SHA3_CTX}) = UInt64
+state_type(::Type{SHA3_CTX})     = UInt64
 
 # blocklen is the number of bytes of data processed by the transform!() function at once
-blocklen(::Type{SHA1_CTX}) = UInt64(64)
+blocklen(::Type{SHA1_CTX})     = UInt64(64)
 blocklen(::Type{SHA2_224_CTX}) = UInt64(64)
 blocklen(::Type{SHA2_256_CTX}) = UInt64(64)
 blocklen(::Type{SHA2_384_CTX}) = UInt64(128)
@@ -213,7 +213,7 @@ copy(ctx::T) where {T<:SHA3_CTX} = T(copy(ctx.state), ctx.bytecount, copy(ctx.bu
 
 # Make printing these types a little friendlier
 import Base.show
-show(io::IO, ::SHA1_CTX) = print(io, "SHA1 hash state")
+show(io::IO, ::SHA1_CTX)     = print(io, "SHA1 hash state")
 show(io::IO, ::SHA2_224_CTX) = print(io, "SHA2 224-bit hash state")
 show(io::IO, ::SHA2_256_CTX) = print(io, "SHA2 256-bit hash state")
 show(io::IO, ::SHA2_384_CTX) = print(io, "SHA2 384-bit hash state")

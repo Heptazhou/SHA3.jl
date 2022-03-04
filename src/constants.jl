@@ -2,12 +2,12 @@
 
 # Hash constant words K for SHA1
 const K1 = UInt32[
-    0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6
+    0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6,
 ]
 
 # Initial hash value H for SHA1
 const SHA1_initial_hash_value = UInt32[
-    0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0
+    0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0,
 ]
 
 
@@ -29,19 +29,19 @@ const K256 = (
     0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5,
     0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
     0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
-    0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+    0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
 )
 
 # Initial hash value H for SHA-224:
 const SHA2_224_initial_hash_value = UInt32[
     0xc1059ed8, 0x367cd507, 0x3070dd17, 0xf70e5939,
-    0xffc00b31, 0x68581511, 0x64f98fa7, 0xbefa4fa4
+    0xffc00b31, 0x68581511, 0x64f98fa7, 0xbefa4fa4,
 ]
 
 
 const SHA2_256_initial_hash_value = UInt32[
     0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
-    0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
+    0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19,
 ]
 
 # Hash constant words K for SHA-384 and SHA-512:
@@ -85,7 +85,7 @@ const K512 = (
     0x28db77f523047d84, 0x32caab7b40c72493,
     0x3c9ebe0a15c9bebc, 0x431d67c49c100d4c,
     0x4cc5d4becb3e42b6, 0x597f299cfc657e2a,
-    0x5fcb6fab3ad6faec, 0x6c44198c4a475817
+    0x5fcb6fab3ad6faec, 0x6c44198c4a475817,
 )
 
 # Initial hash value H for SHA-384
@@ -93,7 +93,7 @@ const SHA2_384_initial_hash_value = UInt64[
     0xcbbb9d5dc1059ed8, 0x629a292a367cd507,
     0x9159015a3070dd17, 0x152fecd8f70e5939,
     0x67332667ffc00b31, 0x8eb44a8768581511,
-    0xdb0c2e0d64f98fa7, 0x47b5481dbefa4fa4
+    0xdb0c2e0d64f98fa7, 0x47b5481dbefa4fa4,
 ]
 
 # Initial hash value H for SHA-512
@@ -101,7 +101,7 @@ const SHA2_512_initial_hash_value = UInt64[
     0x6a09e667f3bcc908, 0xbb67ae8584caa73b,
     0x3c6ef372fe94f82b, 0xa54ff53a5f1d36f1,
     0x510e527fade682d1, 0x9b05688c2b3e6c1f,
-    0x1f83d9abfb41bd6b, 0x5be0cd19137e2179
+    0x1f83d9abfb41bd6b, 0x5be0cd19137e2179,
 ]
 
 # Round constants for SHA3 rounds
@@ -113,17 +113,17 @@ const SHA3_ROUND_CONSTS = UInt64[
     0x000000008000808b, 0x800000000000008b, 0x8000000000008089,
     0x8000000000008003, 0x8000000000008002, 0x8000000000000080,
     0x000000000000800a, 0x800000008000000a, 0x8000000080008081,
-    0x8000000000008080, 0x0000000080000001, 0x8000000080008008
+    0x8000000000008080, 0x0000000080000001, 0x8000000080008008,
 ]
 
 # Rotation constants for SHA3 rounds
 const SHA3_ROTC = UInt64[
-    1,  3,  6,  10, 15, 21, 28, 36, 45, 55, 2,  14,
-    27, 41, 56, 8,  25, 43, 62, 18, 39, 61, 20, 44
+     1,  3,  6, 10, 15, 21, 28, 36, 45, 55,  2, 14,
+    27, 41, 56,  8, 25, 43, 62, 18, 39, 61, 20, 44,
 ]
 
 # Permutation indices for SHA3 rounds (+1'ed so as to work with julia's 1-based indexing)
 const SHA3_PILN = Int[
-    11, 8,  12, 18, 19, 4, 6,  17, 9,  22, 25, 5,
-    16, 24, 20, 14, 13, 3, 21, 15, 23, 10,  7,  2
+    11,  8, 12, 18, 19, 4,  6, 17,  9, 22, 25, 5,
+    16, 24, 20, 14, 13, 3, 21, 15, 23, 10,  7, 2,
 ]

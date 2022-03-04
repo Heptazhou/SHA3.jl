@@ -9,14 +9,14 @@ end
 
 function do_tests(filepath)
     # test performance
-    print("read:    ")
+    print("read:     ")
     @time begin
         fh = open(filepath, "r")
         bytes = read(fh)
     end
     GC.gc()
 
-    print("SHA-1:   ")
+    print("SHA-1:    ")
     sha1(bytes)
     GC.gc()
     @time sha1(bytes)

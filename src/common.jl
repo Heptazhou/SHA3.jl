@@ -77,7 +77,7 @@ end
 
 
 # Clear out any saved data in the buffer, append total bitlength, and return our precious hash!
-# Note: SHA3_CTX has a more specialised method
+# Note: SHA3_CTX has a more specialized method
 """
     digest!(context)
 
