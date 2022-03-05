@@ -9,7 +9,7 @@ function describe_hash(T::Type{S}) where {S <: SHA.SHA_CTX}
     if T <: SHA.SHA3_CTX return "SHA3-$(SHA.digestlen(T)*8)" end
 end
 
-@info("Loaded hash types: $(join(sort([describe_hash(t[2]) for t in sha_types]), ", ", " and "))")
+@info("Loaded hash types: $(join(sort([describe_hash(t[2]) for t in sha_types]), ", ", ", and "))")
 
 @testset "Hashing" begin
     # First, test processing the data in one go
@@ -72,6 +72,8 @@ end
     for (key, msg, fun, hash) in hmac_data
         digest = bytes2hex(fun(Vector{UInt8}(key), Vector{UInt8}(msg)))
         @test digest == hash
+        digest = bytes2hex(fun(Vector{UInt8}(key), SubString(msg)))
+        @test digest == hash
         digest = bytes2hex(fun(Vector{UInt8}(key), IOBuffer(msg)))
         @test digest == hash
     end
@@ -82,6 +84,7 @@ replstr(x) = sprint((io, x) -> show(IOContext(io, :limit => true), MIME("text/pl
     for idx in 1:length(ctxs)
         @test typeof(copy(ctxs[idx]())) == typeof(ctxs[idx]())
         @test replstr(ctxs[idx]()) == shws[idx]
+        @test_throws ErrorException copy(ctxs[idx]()).nonexistingfield
     end
 end
 

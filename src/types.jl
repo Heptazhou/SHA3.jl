@@ -14,6 +14,20 @@ mutable struct SHA1_CTX <: SHA_CTX
     W::Array{UInt32,1}
 end
 
+function Base.getproperty(ctx::SHA1_CTX, fieldname::Symbol)
+    if fieldname === :state
+        return getfield(ctx, :state)::Vector{UInt32}
+    elseif fieldname === :bytecount
+        return getfield(ctx, :bytecount)::UInt64
+    elseif fieldname === :buffer
+        return getfield(ctx, :buffer)::Vector{UInt8}
+    elseif fieldname === :W
+        return getfield(ctx, :W)::Vector{UInt32}
+    else
+        error("type ", typeof(ctx), " has no field ", fieldname)
+    end
+end
+
 # SHA2 224/256/384/512-bit Context Structures
 mutable struct SHA2_224_CTX <: SHA2_CTX
     state::Array{UInt32,1}
@@ -46,13 +60,10 @@ function Base.getproperty(ctx::SHA2_CTX, fieldname::Symbol)
         return getfield(ctx, :bytecount)::Union{UInt64,UInt128}
     elseif fieldname === :buffer
         return getfield(ctx, :buffer)::Vector{UInt8}
-    elseif fieldname === :W
-        return getfield(ctx, :W)::Vector{UInt32}
     else
-        error("SHA2_CTX has no field ", fieldname)
+        error("type ", typeof(ctx), " has no field ", fieldname)
     end
 end
-
 
 # Typealias common nicknames for SHA2 family of functions
 const SHA224_CTX = SHA2_224_CTX
@@ -120,7 +131,6 @@ state_type(::Type{SHA2_224_CTX}) = UInt32
 state_type(::Type{SHA2_256_CTX}) = UInt32
 state_type(::Type{SHA2_384_CTX}) = UInt64
 state_type(::Type{SHA2_512_CTX}) = UInt64
-state_type(::Type{SHA3_CTX})     = UInt64
 
 # blocklen is the number of bytes of data processed by the transform!() function at once
 blocklen(::Type{SHA1_CTX})     = UInt64(64)
