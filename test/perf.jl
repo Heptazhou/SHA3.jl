@@ -6,7 +6,6 @@ elseif !isfile(ARGS[1])
     error("file $(ARGS[1]) does not exist")
 end
 
-
 function do_tests(filepath)
     # test performance
     print("read:     ")

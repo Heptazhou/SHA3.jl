@@ -1,6 +1,6 @@
 # Define some data we will run our tests on
 lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-sphinx_of_quartz = SubString("Sphinx of black quartz, judge my vow.")
+sphinx_of_quartz = GenericString("Sphinx of black quartz, judge my vow.")
 notmany_as_array = repeat([0x61], 25*8 - 64*2 - 1)
 so_many_as_array = repeat([0x61], 1000000)
 so_many_as_tuple = ntuple((i) -> 0x61, 1000000)

@@ -3,7 +3,7 @@ uuid = "024dbb13-cbdc-4f8e-9218-0cc7169443be"
 authors = ["Heptazhou <zhou at 0h7z dot com>"]
 
 [compat]
-julia = "≥ 1.0.0"
+julia = "≥ 1"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
