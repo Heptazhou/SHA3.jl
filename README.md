@@ -1,12 +1,10 @@
 #	SHA3.jl
-[![CI status](https://github.com/Heptazhou/sha3.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/Heptazhou/sha3.jl/actions/workflows/CI.yml)
-[![codecov.io](https://codecov.io/gh/Heptazhou/sha3.jl/branch/master/graph/badge.svg)](https://app.codecov.io/gh/Heptazhou/sha3.jl)
-<sup>*on master*</sup>
+[![CI status](https://github.com/Heptazhou/SHA3.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/Heptazhou/SHA3.jl/actions/workflows/CI.yml)
 
 *****
 ##	Usage
 ```julia
-julia> ]add https://github.com/Heptazhou/sha3.jl#stable
+pkg> add https://github.com/Heptazhou/sha3.jl#stable
 
 julia> using SHA3
 julia> hash = ""          |> sha3_512 |> bytes2hex  # a69f73cca23a9ac5...

@@ -2,7 +2,8 @@ using SHA3
 
 if isempty(ARGS)
 	error("need file to test sha perf")
-elseif !isfile(ARGS[1])
+end
+if !isfile(ARGS[1])
 	error("file $(ARGS[1]) does not exist")
 end
 
@@ -10,7 +11,7 @@ function do_tests(filepath)
 	# test performance
 	print("read:     ")
 	@time begin
-		fh = open(filepath, "r")
+		fh    = open(filepath, "r")
 		bytes = read(fh)
 	end
 	GC.gc()
@@ -42,3 +43,4 @@ function do_tests(filepath)
 end
 
 do_tests(ARGS[1])
+

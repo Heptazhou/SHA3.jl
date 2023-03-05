@@ -15,10 +15,7 @@ struct HMAC_CTX{CTX <: SHA_CTX}
 		end
 
 		pad = blocksize - length(key)
-
-		if pad > 0
-			key = [key; fill(0x00, pad)]
-		end
+		pad > 0 && (key = [key; fill(0x00, pad)])
 
 		update!(ctx, key .⊻ 0x36)
 		new{CTX}(ctx, key .⊻ 0x5c)
@@ -36,3 +33,4 @@ function digest!(ctx::HMAC_CTX{CTX}) where CTX
 	update!(_ctx, digest)
 	digest!(_ctx)
 end
+

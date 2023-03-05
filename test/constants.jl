@@ -126,3 +126,4 @@ hmac_data = (
 	("The quick brown fox jumps over the lazy dog"^2, "message", hmac_sha256, "5597b93a2843078cbb0c920ae41dfe20f1685e10c67e423c11ab91adfc319d12"),
 	("The quick brown fox jumps over the lazy dog"^2, "message", hmac_sha3_512, "1ab794c86946e0bd4c6d667d4846d370f7239a9fe15db348ec57322b9dd36196be7c41e39dd0534ea375af06e2bb0fca6beac7b35dbdf74f9a483de3b318039a"),
 )
+

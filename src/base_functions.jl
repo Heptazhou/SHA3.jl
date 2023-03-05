@@ -38,3 +38,4 @@ sigma1_512(x) = (S64(19, UInt64(x)) ⊻ S64(61, UInt64(x)) ⊻ R(0006, UInt64(x)
 
 # Let us be able to bswap vector of these types as well
 bswap!(x::Vector{<:Integer}) = map!(bswap, x, x)
+

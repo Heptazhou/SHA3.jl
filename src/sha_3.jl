@@ -44,7 +44,7 @@ function transform!(context::T) where T <: SHA3_CTX
 		state[1] ⊻= SHA3_ROUND_CONSTS[round]
 	end
 
-	return context.state
+	context.state
 end
 
 
@@ -69,5 +69,6 @@ function digest!(context::T) where T <: SHA3_CTX
 	transform!(context)
 
 	# Return the digest
-	return reinterpret(UInt8, context.state)[1:digestlen(T)]
+	reinterpret(UInt8, context.state)[1:digestlen(T)]
 end
+

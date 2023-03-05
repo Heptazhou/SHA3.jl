@@ -3,15 +3,14 @@
 abstract type SHA_CTX end
 abstract type SHA2_CTX <: SHA_CTX end
 abstract type SHA3_CTX <: SHA_CTX end
-import Base: copy
+import Base.copy
 
-# We derive SHA1_CTX straight from SHA_CTX since it does not have a
-# family of types like SHA2 or SHA3 do
+# We derive SHA1_CTX straight from SHA_CTX since it does not have a family of types like SHA2 or SHA3 do
 mutable struct SHA1_CTX <: SHA_CTX
-	state::Vector{UInt32}
-	bytecount::UInt64
-	buffer::Vector{UInt8}
-	W::Vector{UInt32}
+	state     :: Vector{UInt32}
+	bytecount :: UInt64
+	buffer    :: Vector{UInt8}
+	W         :: Vector{UInt32}
 end
 
 function Base.getproperty(ctx::SHA1_CTX, fieldname::Symbol)
@@ -31,27 +30,27 @@ end
 
 # SHA2 224/256/384/512-bit Context Structures
 mutable struct SHA2_224_CTX <: SHA2_CTX
-	state::Vector{UInt32}
-	bytecount::UInt64
-	buffer::Vector{UInt8}
+	state     :: Vector{UInt32}
+	bytecount :: UInt64
+	buffer    :: Vector{UInt8}
 end
 
 mutable struct SHA2_256_CTX <: SHA2_CTX
-	state::Vector{UInt32}
-	bytecount::UInt64
-	buffer::Vector{UInt8}
+	state     :: Vector{UInt32}
+	bytecount :: UInt64
+	buffer    :: Vector{UInt8}
 end
 
 mutable struct SHA2_384_CTX <: SHA2_CTX
-	state::Vector{UInt64}
-	bytecount::UInt128
-	buffer::Vector{UInt8}
+	state     :: Vector{UInt64}
+	bytecount :: UInt128
+	buffer    :: Vector{UInt8}
 end
 
 mutable struct SHA2_512_CTX <: SHA2_CTX
-	state::Vector{UInt64}
-	bytecount::UInt128
-	buffer::Vector{UInt8}
+	state     :: Vector{UInt64}
+	bytecount :: UInt128
+	buffer    :: Vector{UInt8}
 end
 
 function Base.getproperty(ctx::SHA2_CTX, fieldname::Symbol)
@@ -75,28 +74,28 @@ const SHA512_CTX = SHA2_512_CTX
 
 # SHA3 224/256/384/512-bit context structures
 mutable struct SHA3_224_CTX <: SHA3_CTX
-	state::Vector{UInt64}
-	bytecount::UInt128
-	buffer::Vector{UInt8}
-	bc::Vector{UInt64}
+	state     :: Vector{UInt64}
+	bytecount :: UInt128
+	buffer    :: Vector{UInt8}
+	bc        :: Vector{UInt64}
 end
 mutable struct SHA3_256_CTX <: SHA3_CTX
-	state::Vector{UInt64}
-	bytecount::UInt128
-	buffer::Vector{UInt8}
-	bc::Vector{UInt64}
+	state     :: Vector{UInt64}
+	bytecount :: UInt128
+	buffer    :: Vector{UInt8}
+	bc        :: Vector{UInt64}
 end
 mutable struct SHA3_384_CTX <: SHA3_CTX
-	state::Vector{UInt64}
-	bytecount::UInt128
-	buffer::Vector{UInt8}
-	bc::Vector{UInt64}
+	state     :: Vector{UInt64}
+	bytecount :: UInt128
+	buffer    :: Vector{UInt8}
+	bc        :: Vector{UInt64}
 end
 mutable struct SHA3_512_CTX <: SHA3_CTX
-	state::Vector{UInt64}
-	bytecount::UInt128
-	buffer::Vector{UInt8}
-	bc::Vector{UInt64}
+	state     :: Vector{UInt64}
+	bytecount :: UInt128
+	buffer    :: Vector{UInt8}
+	bc        :: Vector{UInt64}
 end
 
 function Base.getproperty(ctx::SHA3_CTX, fieldname::Symbol)
@@ -116,7 +115,7 @@ end
 
 # Define constants via functions so as not to bloat context objects. Yay dispatch!
 
-# Digest lengths for SHA1, SHA2 and SHA3. This is easy to figure out from the typename
+# Digest lengths for SHA1, SHA2, and SHA3. This is easy to figure out from the typename
 digestlen(::Type{SHA1_CTX})     = 20
 digestlen(::Type{SHA2_224_CTX}) = 28
 digestlen(::Type{SHA3_224_CTX}) = 28
@@ -228,3 +227,4 @@ show(io::IO, ::SHA3_512_CTX) = print(io, "SHA3 512-bit hash state")
 
 # use our types to define a method to get a pointer to the state buffer
 buffer_pointer(ctx::T) where T <: SHA_CTX = Ptr{state_type(T)}(pointer(ctx.buffer))
+

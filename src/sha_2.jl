@@ -1,5 +1,4 @@
 macro R1_16(j, T)
-
 	ww = (:a, :b, :c, :d, :e, :f, :g, :h)
 
 	a = ww[((81-j)%8)+1]
@@ -15,13 +14,14 @@ macro R1_16(j, T)
 		Sigma0 = :Sigma0_512
 		Sigma1 = :Sigma1_512
 		K      = :K512
-	elseif T == 256
+	end
+	if T == 256
 		Sigma0 = :Sigma0_256
 		Sigma1 = :Sigma1_256
 		K      = :K256
 	end
 
-	return esc(quote
+	esc(quote
 		# We byteswap every input byte
 		v = bswap(unsafe_load(pbuf, $j))
 		unsafe_store!(pbuf, v, $j)
@@ -35,7 +35,6 @@ macro R1_16(j, T)
 end
 
 macro R17_80(j, T)
-
 	ww = (:a, :b, :c, :d, :e, :f, :g, :h)
 
 	a = ww[((81-j)%8)+1]
@@ -53,7 +52,8 @@ macro R17_80(j, T)
 		sigma0 = :sigma0_512
 		sigma1 = :sigma1_512
 		K      = :K512
-	elseif T == 256
+	end
+	if T == 256
 		Sigma0 = :Sigma0_256
 		Sigma1 = :Sigma1_256
 		sigma0 = :sigma0_256
@@ -61,7 +61,7 @@ macro R17_80(j, T)
 		K      = :K256
 	end
 
-	return esc(quote
+	esc(quote
 		s0 = unsafe_load(pbuf, mod1($j + 1, 16))
 		s0 = $sigma0(s0)
 		s1 = unsafe_load(pbuf, mod1($j + 14, 16))
@@ -82,30 +82,25 @@ macro R_init(T)
 	for i in 1:16
 		expr = :($expr; @R1_16($i, $T))
 	end
-	return esc(expr)
+	esc(expr)
 end
 
 macro R_end(T)
-
-	if T == 256
-		n_rounds = 64
-	elseif T == 512
-		n_rounds = 80
-	end
+	T == 256 && (n_rounds = 64)
+	T == 512 && (n_rounds = 80)
 
 	expr = :()
 	for i in 17:n_rounds
 		expr = :($expr; @R17_80($i, $T))
 	end
-
-	return esc(expr)
+	esc(expr)
 end
 
 @generated function transform!(context::Union{SHA2_224_CTX, SHA2_256_CTX, SHA2_384_CTX, SHA2_512_CTX})
 	context <: Union{SHA2_224_CTX, SHA2_256_CTX} && (T = 256)
 	context <: Union{SHA2_384_CTX, SHA2_512_CTX} && (T = 512)
 
-	return quote
+	quote
 		pbuf = buffer_pointer(context)
 		# Initialize registers with the previous intermediate values (our state)
 		a, b, c, d, e, f, g, h = context.state
@@ -129,3 +124,4 @@ end
 		end
 	end
 end
+

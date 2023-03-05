@@ -1,7 +1,6 @@
 # Common update and digest functions which work across SHA1 and SHA2
 
-# update! takes in variable-length data, buffering it into blocklen()-sized pieces,
-# calling transform!() when necessary to update the internal hash state.
+# update! takes in variable-length data, buffering it into blocklen()-sized pieces, calling transform!() when necessary to update the internal hash state.
 """
 	update!(context, data[, datalen])
 
@@ -9,11 +8,12 @@ Update the SHA context with the bytes in data. See also [`digest!`](@ref) for
 finalizing the hash.
 
 # Examples
-```julia-repl
+```jldoctest
 julia> ctx = SHA1_CTX()
 SHA1 hash state
 
-julia> update!(ctx, b"data to to be hashed")
+julia> update!(ctx, b"data to be hashed")
+0x0000000000000011
 ```
 """
 function update!(context::T, data::U, datalen = length(data)) where {T <: SHA_CTX, U <: AbstractBytes}
@@ -80,20 +80,22 @@ end
 """
 	digest!(context)
 
-Finalize the SHA context and return the hash as vector of bytes (Vector{Uint8}).
+Finalize the SHA context and return the hash as vector of bytes
+(Vector{Uint8}).
 
 # Examples
-```julia-repl
+```jldoctest
 julia> ctx = SHA1_CTX()
 SHA1 hash state
 
 julia> update!(ctx, b"data to be hashed")
+0x0000000000000011
 
 julia> digest!(ctx)
 20-element Vector{UInt8}:
  0x31
  0x4f
- ⋮
+    ⋮
  0x7b
  0xf6
 ```
@@ -109,5 +111,6 @@ function digest!(context::T) where T <: SHA_CTX
 	transform!(context)
 
 	# Return the digest
-	return reinterpret(UInt8, bswap!(context.state))[1:digestlen(T)]
+	reinterpret(UInt8, bswap!(context.state))[1:digestlen(T)]
 end
+

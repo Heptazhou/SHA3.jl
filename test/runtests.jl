@@ -24,9 +24,7 @@ end
 		end
 	end
 
-	# Do another test on the "so many 'a's" data where we chunk up the data into
-	# two chunks, (sized appropriately to AVOID overflow from one update to another)
-	# in order to test multiple update!() calls
+	# Do another test on the "so many 'a's" data where we chunk up the data into two chunks, (sized appropriately to AVOID overflow from one update to another) in order to test multiple update!() calls
 	@testset "Chunked Properly" begin
 		for sha_func in sha_funcs
 			ctx = sha_types[sha_func]()
@@ -37,9 +35,7 @@ end
 		end
 	end
 
-	# Do another test on the "so many 'a's" data where we chunk up the data into
-	# three chunks, (sized appropriately to CAUSE overflow from one update to another)
-	# in order to test multiple update!() calls as well as the overflow codepaths
+	# Do another test on the "so many 'a's" data where we chunk up the data into three chunks, (sized appropriately to CAUSE overflow from one update to another) in order to test multiple update!() calls as well as the overflow codepaths
 	@testset "Chunked clumsily" begin
 		for sha_func in sha_funcs
 			ctx = sha_types[sha_func]()
@@ -92,3 +88,4 @@ end
 		@test_throws MethodError f(UInt32[0x23467, 0x324775])
 	end
 end
+
