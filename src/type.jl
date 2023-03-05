@@ -1,9 +1,10 @@
-# Type hierarchy to aid in splitting up of SHA2 algorithms
-# as SHA224/256 are similar, and SHA-384/512 are similar
+# Data to be hashed
+const AbstractBytes = Union{AbstractVector{UInt8}, NTuple{N, UInt8} where N}
+
+# Type hierarchy to aid in splitting up of SHA2 algorithms as SHA224/256 are similar, and SHA-384/512 are similar
 abstract type SHA_CTX end
 abstract type SHA2_CTX <: SHA_CTX end
 abstract type SHA3_CTX <: SHA_CTX end
-import Base.copy
 
 # We derive SHA1_CTX straight from SHA_CTX since it does not have a family of types like SHA2 or SHA3 do
 mutable struct SHA1_CTX <: SHA_CTX
@@ -209,6 +210,7 @@ Construct an empty SHA1 context.
 SHA1_CTX() = SHA1_CTX(copy(SHA1_initial_hash_value), 0, zeros(UInt8, blocklen(SHA1_CTX)), Vector{UInt32}(undef, 80))
 
 # Copy functions
+import Base.copy
 copy(ctx::T) where T <: SHA1_CTX = T(copy(ctx.state), ctx.bytecount, copy(ctx.buffer), copy(ctx.W))
 copy(ctx::T) where T <: SHA2_CTX = T(copy(ctx.state), ctx.bytecount, copy(ctx.buffer))
 copy(ctx::T) where T <: SHA3_CTX = T(copy(ctx.state), ctx.bytecount, copy(ctx.buffer), Vector{UInt64}(undef, 5))

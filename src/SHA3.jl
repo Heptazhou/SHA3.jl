@@ -37,17 +37,15 @@ export hmac_sha224, hmac_sha256, hmac_sha384, hmac_sha512
 export hmac_sha2_224, hmac_sha2_256, hmac_sha2_384, hmac_sha2_512
 export hmac_sha3_224, hmac_sha3_256, hmac_sha3_384, hmac_sha3_512
 
-# data to be hashed
-const AbstractBytes = Union{AbstractVector{UInt8}, NTuple{N, UInt8} where N}
-
+include("base_func.jl")
 include("const.jl")
 include("type.jl")
-include("base_func.jl")
+
+include("common.jl")
+include("hmac.jl")
 include("sha_1.jl")
 include("sha_2.jl")
 include("sha_3.jl")
-include("common.jl")
-include("hmac.jl")
 
 # Create data types and convenience functions for each hash implemented
 for (f, ctx) in [

@@ -32,6 +32,8 @@ end
 			SHA.update!(ctx, so_many_as_array[1+2SHA.blocklen(typeof(ctx)):end])
 			hash = bytes2hex(SHA.digest!(ctx))
 			@test hash == answers[sha_func][end]
+			ctx = sha_types[sha_func]()
+			@test_throws BoundsError SHA.update!(ctx, so_many_as_array, length(so_many_as_array) + 1)
 		end
 	end
 

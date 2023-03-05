@@ -21,7 +21,7 @@ function update!(context::T, data::U, datalen = length(data)) where {T <: SHA_CT
 	UIntXXX = typeof(context.bytecount)
 
 	# Process as many complete blocks as possible
-	0 ≤ datalen ≤ length(data) || throw(BoundsError(data, firstindex(data) + datalen - 1))
+	0 ≤ datalen ≤ length(data) || boundserror(data, firstindex(data) + datalen - 1)
 	len       = convert(UIntXXX, datalen)
 	data_idx  = convert(UIntXXX, firstindex(data) - 1)
 	usedspace = context.bytecount % blocklen(T)

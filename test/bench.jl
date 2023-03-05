@@ -1,3 +1,5 @@
+Pkg.activate("$(@__DIR__)/..")
+
 using SHA3
 
 if isempty(ARGS)
