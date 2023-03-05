@@ -1,7 +1,7 @@
 using SHA3, Test
 const SHA = SHA3
 
-include("constants.jl")
+include("const.jl")
 
 function describe_hash(T::Type{S}) where S <: SHA.SHA_CTX
 	T <: SHA.SHA1_CTX && return "SHA1"
